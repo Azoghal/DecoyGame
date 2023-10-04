@@ -17,8 +17,8 @@ var particles = preload("res://game_objects/particles/boyExplosion.tscn")
 func _ready():
 	# These values need to be adjusted for the actor's speed
 	# and the navigation layout.
-	navigation_agent.path_desired_distance = 12.0
-	navigation_agent.target_desired_distance = 12.0
+	navigation_agent.path_desired_distance = 50.0
+	navigation_agent.target_desired_distance = 10.0
 	
 	# Make sure to not await during _ready.
 	call_deferred("actor_setup")

@@ -19,6 +19,7 @@ func spawner_setup():
 		$Node2D/World/SpawnerPath/SpawnerPathFollow.progress_ratio = randf()
 		$Node2D/World.add_child(spawner)
 		spawner.position = $Node2D/World/SpawnerPath/SpawnerPathFollow.global_position
+		spawner.initialise()
 		spawners.append(spawner)
 	for s in spawners:
 		s.parent_of_spawned = $Node2D/World

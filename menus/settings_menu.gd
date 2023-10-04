@@ -57,3 +57,7 @@ func _on_sfx_slider_value_changed(value):
 
 func _on_menu_slider_value_changed(value):
 	settings.set_menu_level(value)
+
+func _on_any_slider_released(value_changed: bool):
+	if value_changed:
+		settings.modified_settings.emit()

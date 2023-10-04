@@ -3,16 +3,17 @@ extends Node2D
 @export var dist_threshold = 100
 @export var target_boy: Node2D
 var do_ray = true
+var gone = false
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	$Sprite2D.visible = false
 	pass
 
-func initialise(target: Node2D):
+func initialise(target: Node2D, pos):
 	self.target_boy = target
 	GameInfo.set_colour(self, target.colour)
 	self.position = Vector2(get_viewport_rect().size/2)
-	$RayCast2D.target_position = target_boy.position - self.position
+	$RayCast2D.target_position = pos - self.position
 	
 func _physics_process(delta):
 	if do_ray:
@@ -34,8 +35,6 @@ func _process(delta):
 
 
 func _on_deactivate_area_body_entered(body):
-#	if body.is_in_group("Enemy"):
-#		print("fade out")
-#		queue_free()
-	pass
-
+	if body.is_in_group("Enemy") and not gone:
+		gone = true
+		self.queue_free()

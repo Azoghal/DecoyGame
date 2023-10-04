@@ -120,11 +120,15 @@ size_flags_horizontal = 4
 text = "Exit"
 
 [connection signal="toggled" from="HBoxContainer3/MasterMute" to="." method="_on_master_mute_toggled"]
+[connection signal="drag_ended" from="HBoxContainer3/MasterSlider" to="." method="_on_any_slider_released"]
 [connection signal="value_changed" from="HBoxContainer3/MasterSlider" to="." method="_on_master_slider_value_changed"]
 [connection signal="toggled" from="HBoxContainer/MusicMute" to="." method="_on_music_mute_toggled"]
+[connection signal="drag_ended" from="HBoxContainer/MusicSlider" to="." method="_on_any_slider_released"]
 [connection signal="value_changed" from="HBoxContainer/MusicSlider" to="." method="_on_music_slider_value_changed"]
 [connection signal="toggled" from="HBoxContainer2/SFXMute" to="." method="_on_sfx_mute_toggled"]
+[connection signal="drag_ended" from="HBoxContainer2/SFXSlider" to="." method="_on_any_slider_released"]
 [connection signal="value_changed" from="HBoxContainer2/SFXSlider" to="." method="_on_sfx_slider_value_changed"]
 [connection signal="toggled" from="HBoxContainer4/MenuMute" to="." method="_on_menu_mute_toggled"]
+[connection signal="drag_ended" from="HBoxContainer4/MenuSlider" to="." method="_on_any_slider_released"]
 [connection signal="value_changed" from="HBoxContainer4/MenuSlider" to="." method="_on_menu_slider_value_changed"]
 [connection signal="button_down" from="Exit" to="." method="_on_exit_button_down"]
