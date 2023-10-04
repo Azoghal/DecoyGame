@@ -1,0 +1,26 @@
+[gd_scene load_steps=2 format=3 uid="uid://dq8stla7ikjio"]
+
+[ext_resource type="Script" path="res://levels/tutorial.gd" id="1_8i8qo"]
+
+[node name="main" type="Node2D"]
+script = ExtResource("1_8i8qo")
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="TODO" type="Label" parent="Control"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+text = "Not yet implemented"
+
+[node name="ReturnToMenu" type="Button" parent="Control"]
+layout_mode = 0
+offset_right = 8.0
+offset_bottom = 8.0
+text = "Return To Menu"
+
+[connection signal="button_down" from="Control/ReturnToMenu" to="." method="_on_return_to_menu_button_down"]

@@ -1,0 +1,77 @@
+[gd_scene load_steps=10 format=3 uid="uid://cs2or3elq4a3g"]
+
+[ext_resource type="Script" path="res://game_objects/game.gd" id="1_d2hpl"]
+[ext_resource type="Texture2D" uid="uid://bt0fc0eyy2vff" path="res://Assets/beachBackground.png" id="2_0i5po"]
+[ext_resource type="PackedScene" uid="uid://cq65myvvyxj7o" path="res://game_objects/obstacle.tscn" id="3_xpf2c"]
+[ext_resource type="PackedScene" uid="uid://cdy6q0kt228x4" path="res://game_objects/base.tscn" id="5_iki7n"]
+[ext_resource type="PackedScene" uid="uid://n2j7qxxlewe2" path="res://game_objects/EnemySpawner.tscn" id="5_mswo4"]
+[ext_resource type="PackedScene" uid="uid://dm6j755qo6xfn" path="res://menus/Shop.tscn" id="6_f57f2"]
+[ext_resource type="PackedScene" uid="uid://bsfyjc7kx80jf" path="res://menus/pause_menu.tscn" id="7_5qjj4"]
+[ext_resource type="AudioStream" uid="uid://b7ocgn5k0rpw7" path="res://Assets/Audio/1.MainTheme-320bit(chosic.com).mp3" id="8_qktrb"]
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_7hlav"]
+vertices = PackedVector2Array(70, 405, 97, 258, 140, 95, 322, 177, 297, 354, 223, 405, 1079, 414, 1073, 551, 1059, 663, 881, 520, 869, 479, 1125, 185, 1103, 302, 821, 462, 357, 496, 360, 402, 784, 264, 861, 548, 1008, 739, 934, 777, 852, 790, 821, 559, 673, 757, 794, 542, 578, 732, 519, 658, 489, 612, 644, -6, 782, 16, 790, 128, 711, 217, 494, 107, 786, 487, 421, 599, 705, 276, 929, 111, 1016, 35, 1101, 62, 841, 209, 384, 617, 347, 677, 299, 742, 210, 750, 115, 704, 70, 639, 60, 504, 271, 486)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4, 5), PackedInt32Array(6, 7, 8, 9, 10), PackedInt32Array(11, 12, 6, 13, 14, 15, 16), PackedInt32Array(17, 9, 8, 18, 19, 20), PackedInt32Array(21, 17, 20, 22), PackedInt32Array(23, 21, 22, 24, 25, 26), PackedInt32Array(27, 28, 29, 30, 31), PackedInt32Array(14, 32, 23, 26, 33), PackedInt32Array(3, 31, 30, 34, 15, 4), PackedInt32Array(35, 36, 37, 11, 38), PackedInt32Array(39, 40, 41, 42, 43, 44, 45, 0), PackedInt32Array(33, 39, 0, 46), PackedInt32Array(16, 38, 11), PackedInt32Array(34, 16, 15), PackedInt32Array(0, 5, 46), PackedInt32Array(33, 46, 14), PackedInt32Array(6, 10, 13), PackedInt32Array(32, 14, 13)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(140, 95, 322, 177, 494, 107, 644, -6, 782, 16, 790, 128, 711, 217, 705, 276, 784, 264, 841, 209, 929, 111, 1016, 35, 1101, 62, 1125, 185, 1103, 302, 1079, 414, 1073, 551, 1059, 663, 1008, 739, 934, 777, 852, 790, 673, 757, 578, 732, 519, 658, 489, 612, 421, 599, 384, 617, 347, 677, 299, 742, 210, 750, 115, 704, 70, 639, 60, 504, 70, 405, 97, 258), PackedVector2Array(223, 405, 297, 354, 360, 402, 357, 496, 271, 486), PackedVector2Array(794, 542, 786, 487, 821, 462, 869, 479, 881, 520, 861, 548, 821, 559)])
+
+[node name="Node" type="Node"]
+script = ExtResource("1_d2hpl")
+
+[node name="GUI" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureRect" type="TextureRect" parent="GUI"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_0i5po")
+expand_mode = 1
+
+[node name="Node2D" type="Node2D" parent="."]
+
+[node name="World" type="Node2D" parent="Node2D"]
+
+[node name="Obstacle" parent="Node2D/World" instance=ExtResource("3_xpf2c")]
+position = Vector2(260, 448)
+
+[node name="Obstacle2" parent="Node2D/World" instance=ExtResource("3_xpf2c")]
+position = Vector2(828, 526)
+
+[node name="Obstacle3" parent="Node2D/World" instance=ExtResource("3_xpf2c")]
+position = Vector2(295, 417)
+
+[node name="Obstacle4" parent="Node2D/World" instance=ExtResource("3_xpf2c")]
+position = Vector2(309, 467)
+
+[node name="NavigationRegion2D" type="NavigationRegion2D" parent="Node2D/World"]
+position = Vector2(-9, 13)
+navigation_polygon = SubResource("NavigationPolygon_7hlav")
+
+[node name="EnemySpawner" parent="Node2D/World" instance=ExtResource("5_mswo4")]
+position = Vector2(-69, 442)
+
+[node name="EnemySpawner2" parent="Node2D/World" instance=ExtResource("5_mswo4")]
+position = Vector2(1267, 454)
+
+[node name="base" parent="Node2D/World" instance=ExtResource("5_iki7n")]
+position = Vector2(610, 430)
+
+[node name="pause_menu" parent="." instance=ExtResource("7_5qjj4")]
+
+[node name="Shop" parent="." instance=ExtResource("6_f57f2")]
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+process_mode = 3
+stream = ExtResource("8_qktrb")
+autoplay = true
+bus = &"Music"
+
+[connection signal="picked_decoy" from="Shop" to="." method="_on_shop_picked_decoy"]

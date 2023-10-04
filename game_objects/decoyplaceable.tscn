@@ -1,0 +1,35 @@
+[gd_scene load_steps=6 format=3 uid="uid://dc4urwkfpdq7a"]
+
+[ext_resource type="Script" path="res://game_objects/decoyplaceable.gd" id="1_5ckry"]
+[ext_resource type="Texture2D" uid="uid://doqo3g0ny0l2h" path="res://Assets/Decoy.png" id="2_ob5bu"]
+[ext_resource type="Texture2D" uid="uid://cxailalnl2fxr" path="res://game_objects/particles/CircleEmissinoMask.png" id="3_qqlew"]
+[ext_resource type="AudioStream" uid="uid://cecfdp4ls5do6" path="res://Assets/Audio/Coffee2.wav" id="4_mbcwn"]
+[ext_resource type="AudioStream" uid="uid://dax081fw5xjg8" path="res://Assets/Audio/Abstract2.wav" id="5_18m6q"]
+
+[node name="decoyplaceable" type="Node2D"]
+script = ExtResource("1_5ckry")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("2_ob5bu")
+
+[node name="Sprite2D2" type="Sprite2D" parent="."]
+texture = ExtResource("3_qqlew")
+
+[node name="PlaceableTimer" type="Timer" parent="."]
+wait_time = 0.1
+one_shot = true
+autostart = true
+
+[node name="PlaceSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_mbcwn")
+bus = &"Menu"
+
+[node name="StopPlaceSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_18m6q")
+bus = &"Menu"
+
+[node name="QueueFreeTimer" type="Timer" parent="."]
+
+[connection signal="timeout" from="PlaceableTimer" to="." method="_on_placeable_timer_timeout"]
+[connection signal="timeout" from="QueueFreeTimer" to="." method="_on_queue_free_timer_timeout"]

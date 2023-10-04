@@ -1,0 +1,130 @@
+[gd_scene load_steps=4 format=3 uid="uid://dq36q271cymya"]
+
+[ext_resource type="Script" path="res://menus/settings_menu.gd" id="1_pky53"]
+[ext_resource type="Theme" uid="uid://cyw05skuv7k51" path="res://menus/UITHEME.tres" id="2_p1vxu"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_cd1iw"]
+font_size = 25
+outline_size = 4
+outline_color = Color(0.566406, 0, 0.773438, 1)
+
+[node name="Settings" type="VBoxContainer"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -39.0
+offset_top = -30.5
+offset_right = 39.0
+offset_bottom = 30.5
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+script = ExtResource("1_pky53")
+
+[node name="SettingsTItle" type="Label" parent="."]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Settings"
+label_settings = SubResource("LabelSettings_cd1iw")
+
+[node name="Sound" type="Label" parent="."]
+layout_mode = 2
+text = "Sound"
+horizontal_alignment = 1
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="."]
+layout_mode = 2
+alignment = 1
+
+[node name="MasterLabel" type="Label" parent="HBoxContainer3"]
+layout_mode = 2
+size_flags_horizontal = 2
+text = "Master"
+
+[node name="MasterMute" type="CheckBox" parent="HBoxContainer3"]
+layout_mode = 2
+button_pressed = true
+
+[node name="MasterSlider" type="HSlider" parent="HBoxContainer3"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+size_flags_vertical = 4
+value = 100.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 2
+alignment = 1
+
+[node name="MusicLabel" type="Label" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 2
+theme = ExtResource("2_p1vxu")
+text = "Music"
+
+[node name="MusicMute" type="CheckBox" parent="HBoxContainer"]
+layout_mode = 2
+button_pressed = true
+
+[node name="MusicSlider" type="HSlider" parent="HBoxContainer"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 4
+value = 100.0
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="."]
+layout_mode = 2
+alignment = 1
+
+[node name="SFXLabel" type="Label" parent="HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 2
+text = "SFX"
+
+[node name="SFXMute" type="CheckBox" parent="HBoxContainer2"]
+layout_mode = 2
+button_pressed = true
+
+[node name="SFXSlider" type="HSlider" parent="HBoxContainer2"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 4
+value = 100.0
+
+[node name="HBoxContainer4" type="HBoxContainer" parent="."]
+layout_mode = 2
+alignment = 1
+
+[node name="MenuLabel" type="Label" parent="HBoxContainer4"]
+layout_mode = 2
+size_flags_horizontal = 2
+text = "Menu"
+
+[node name="MenuMute" type="CheckBox" parent="HBoxContainer4"]
+layout_mode = 2
+button_pressed = true
+
+[node name="MenuSlider" type="HSlider" parent="HBoxContainer4"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 4
+value = 100.0
+
+[node name="Exit" type="Button" parent="."]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Exit"
+
+[connection signal="toggled" from="HBoxContainer3/MasterMute" to="." method="_on_master_mute_toggled"]
+[connection signal="value_changed" from="HBoxContainer3/MasterSlider" to="." method="_on_master_slider_value_changed"]
+[connection signal="toggled" from="HBoxContainer/MusicMute" to="." method="_on_music_mute_toggled"]
+[connection signal="value_changed" from="HBoxContainer/MusicSlider" to="." method="_on_music_slider_value_changed"]
+[connection signal="toggled" from="HBoxContainer2/SFXMute" to="." method="_on_sfx_mute_toggled"]
+[connection signal="value_changed" from="HBoxContainer2/SFXSlider" to="." method="_on_sfx_slider_value_changed"]
+[connection signal="toggled" from="HBoxContainer4/MenuMute" to="." method="_on_menu_mute_toggled"]
+[connection signal="value_changed" from="HBoxContainer4/MenuSlider" to="." method="_on_menu_slider_value_changed"]
+[connection signal="button_down" from="Exit" to="." method="_on_exit_button_down"]

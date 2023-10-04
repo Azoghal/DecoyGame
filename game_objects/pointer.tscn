@@ -1,0 +1,29 @@
+[gd_scene load_steps=4 format=3 uid="uid://b7m7okdli5ke4"]
+
+[ext_resource type="Script" path="res://game_objects/pointer.gd" id="1_1mxt6"]
+[ext_resource type="Texture2D" uid="uid://b2dca4c8uap14" path="res://Assets/Pointer.png" id="1_wdwyy"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_aoxh6"]
+size = Vector2(43, 30)
+
+[node name="Pointer" type="Node2D"]
+script = ExtResource("1_1mxt6")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("1_wdwyy")
+
+[node name="RayCast2D" type="RayCast2D" parent="."]
+enabled = false
+exclude_parent = false
+collision_mask = 8
+collide_with_areas = true
+collide_with_bodies = false
+
+[node name="Deactivate Area" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Deactivate Area"]
+position = Vector2(-1, 0)
+shape = SubResource("RectangleShape2D_aoxh6")
+
+[connection signal="body_entered" from="Deactivate Area" to="." method="_on_deactivate_area_body_entered"]

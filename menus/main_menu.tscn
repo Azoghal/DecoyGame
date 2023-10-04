@@ -1,0 +1,111 @@
+[gd_scene load_steps=8 format=3 uid="uid://coq58vcsyks82"]
+
+[ext_resource type="Script" path="res://menus/main_menu.gd" id="1_a6byg"]
+[ext_resource type="Texture2D" uid="uid://cuxfxkrmxilfm" path="res://Assets/greyer.png" id="2_vi6rp"]
+[ext_resource type="LabelSettings" uid="uid://cr3okie7ayqcn" path="res://menus/MenuHeader.tres" id="3_4mmae"]
+[ext_resource type="Texture2D" uid="uid://cd1hmj48nw241" path="res://Assets/level1thumbnail.png" id="4_15hlv"]
+[ext_resource type="Texture2D" uid="uid://dp6jny76hwm6j" path="res://Assets/level2thumbnail.png" id="5_oqowr"]
+[ext_resource type="PackedScene" uid="uid://dq36q271cymya" path="res://menus/settings_menu.tscn" id="6_0x8o5"]
+[ext_resource type="AudioStream" uid="uid://dvuqy8kuok7r1" path="res://Assets/Audio/the-epic-2-by-rafael-krux(chosic.com).mp3" id="7_seurv"]
+
+[node name="MainMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_a6byg")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_vi6rp")
+expand_mode = 3
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 120
+theme_override_constants/margin_top = 80
+theme_override_constants/margin_right = 120
+theme_override_constants/margin_bottom = 80
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 0
+theme_override_constants/separation = 20
+
+[node name="MenuTitle" type="Label" parent="MarginContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 2
+text = "DecoyBuoy"
+label_settings = ExtResource("3_4mmae")
+horizontal_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/separation = 20
+alignment = 1
+
+[node name="LevelSelect" type="MenuButton" parent="MarginContainer/HBoxContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "Select Level"
+icon = ExtResource("4_15hlv")
+flat = false
+icon_alignment = 2
+item_count = 2
+popup/item_0/text = "Forest"
+popup/item_0/icon = ExtResource("4_15hlv")
+popup/item_0/checkable = 1
+popup/item_0/id = 0
+popup/item_1/text = "Beach"
+popup/item_1/icon = ExtResource("5_oqowr")
+popup/item_1/checkable = 1
+popup/item_1/id = 1
+
+[node name="Start" type="Button" parent="MarginContainer/HBoxContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "Start"
+
+[node name="Tutorial" type="Button" parent="MarginContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+text = "Tutorial"
+
+[node name="Credits" type="Button" parent="MarginContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+text = "Credits"
+
+[node name="Exit" type="Button" parent="MarginContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 10
+text = "Exit"
+icon_alignment = 1
+
+[node name="Settings" parent="MarginContainer/HBoxContainer" instance=ExtResource("6_0x8o5")]
+layout_mode = 2
+show_exit = false
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("7_seurv")
+autoplay = true
+bus = &"Music"
+
+[connection signal="button_down" from="MarginContainer/HBoxContainer/VBoxContainer/HBoxContainer/Start" to="." method="_on_start_button_down"]
+[connection signal="button_down" from="MarginContainer/HBoxContainer/VBoxContainer/Tutorial" to="." method="_on_tutorial_button_down"]
+[connection signal="button_down" from="MarginContainer/HBoxContainer/VBoxContainer/Credits" to="." method="_on_credits_button_down"]
+[connection signal="button_down" from="MarginContainer/HBoxContainer/VBoxContainer/Exit" to="." method="_on_exit_button_down"]

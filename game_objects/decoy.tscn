@@ -1,0 +1,62 @@
+[gd_scene load_steps=8 format=3 uid="uid://b0eequmcfa7cb"]
+
+[ext_resource type="Script" path="res://game_objects/decoy.gd" id="1_e8qko"]
+[ext_resource type="Texture2D" uid="uid://doqo3g0ny0l2h" path="res://Assets/Decoy.png" id="2_pp8fk"]
+[ext_resource type="PackedScene" uid="uid://crwrm8a813he6" path="res://game_objects/particles/ringParticles.tscn" id="3_solqa"]
+[ext_resource type="AudioStream" uid="uid://qek0tbd1j1lo" path="res://Assets/Audio/BLLTShel_Shell Eject_02.wav" id="4_311nh"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_khf1j"]
+radius = 18.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_05ip3"]
+radius = 100.005
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_yyrvr"]
+radius = 100.0
+
+[node name="decoy" type="Node2D" groups=["Decoy"]]
+script = ExtResource("1_e8qko")
+active = true
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(1, -1)
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("2_pp8fk")
+
+[node name="Hitbox" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+shape = SubResource("CircleShape2D_khf1j")
+
+[node name="TauntArea" type="Area2D" parent="." groups=["DecoyTaunt"]]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TauntArea"]
+shape = SubResource("CircleShape2D_05ip3")
+
+[node name="ringParticles" parent="." instance=ExtResource("3_solqa")]
+particle_size = 0.3
+particle_count = 30
+
+[node name="tauntsound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_311nh")
+bus = &"SFX"
+
+[node name="HurtBox" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
+shape = SubResource("CircleShape2D_yyrvr")
+
+[node name="ExplodeTimer" type="Timer" parent="."]
+wait_time = 20.0
+one_shot = true
+autostart = true
+
+[node name="FuseTimer" type="Timer" parent="."]
+wait_time = 0.5
+one_shot = true
+
+[connection signal="body_entered" from="TauntArea" to="." method="_on_taunt_area_body_entered"]
+[connection signal="body_entered" from="HurtBox" to="." method="_on_hurt_box_body_entered"]
+[connection signal="body_exited" from="HurtBox" to="." method="_on_hurt_box_body_exited"]
+[connection signal="timeout" from="ExplodeTimer" to="." method="_on_explode_timer_timeout"]
+[connection signal="timeout" from="FuseTimer" to="." method="_on_fuse_timer_timeout"]

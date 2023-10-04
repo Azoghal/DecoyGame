@@ -1,0 +1,101 @@
+[gd_scene load_steps=6 format=3 uid="uid://dm6j755qo6xfn"]
+
+[ext_resource type="Texture2D" uid="uid://ctieivyjyavq4" path="res://Assets/DecoySmall.png" id="1_crl38"]
+[ext_resource type="Script" path="res://menus/Shop.gd" id="1_y2pk1"]
+[ext_resource type="AudioStream" uid="uid://ctokyarqb318u" path="res://Assets/Audio/Coffee1.wav" id="3_v1mrp"]
+
+[sub_resource type="InputEventKey" id="InputEventKey_3cpp8"]
+device = -1
+keycode = 49
+unicode = 49
+
+[sub_resource type="Shortcut" id="Shortcut_sd5m3"]
+events = [SubResource("InputEventKey_3cpp8")]
+
+[node name="Shop" type="Control"]
+layout_mode = 3
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+grow_horizontal = 2
+script = ExtResource("1_y2pk1")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -37.5
+offset_right = 37.5
+offset_bottom = 75.0
+grow_horizontal = 2
+alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer"]
+layout_mode = 2
+
+[node name="ShortcutLabel" type="Label" parent="HBoxContainer/VBoxContainer"]
+layout_mode = 2
+text = "(1)"
+
+[node name="ButtonBlue" type="Button" parent="HBoxContainer/VBoxContainer"]
+modulate = Color(0.392157, 0.584314, 0.929412, 1)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+shortcut = SubResource("Shortcut_sd5m3")
+icon = ExtResource("1_crl38")
+flat = true
+
+[node name="CountBlue" type="Label" parent="HBoxContainer/VBoxContainer"]
+layout_mode = 2
+text = "2"
+horizontal_alignment = 1
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="HBoxContainer"]
+layout_mode = 2
+
+[node name="ShortcutLabel" type="Label" parent="HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+text = "(2)"
+
+[node name="ButtonGreen" type="Button" parent="HBoxContainer/VBoxContainer2"]
+modulate = Color(0.180392, 0.545098, 0.341176, 1)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+icon = ExtResource("1_crl38")
+flat = true
+
+[node name="CountGreen" type="Label" parent="HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+text = "2"
+horizontal_alignment = 1
+
+[node name="VBoxContainer3" type="VBoxContainer" parent="HBoxContainer"]
+layout_mode = 2
+
+[node name="ShortcutLabel" type="Label" parent="HBoxContainer/VBoxContainer3"]
+layout_mode = 2
+text = "(3)"
+
+[node name="ButtonRed" type="Button" parent="HBoxContainer/VBoxContainer3"]
+modulate = Color(0.803922, 0.360784, 0.360784, 1)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+icon = ExtResource("1_crl38")
+flat = true
+
+[node name="CountRed" type="Label" parent="HBoxContainer/VBoxContainer3"]
+layout_mode = 2
+text = "2"
+horizontal_alignment = 1
+
+[node name="ButtonSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_v1mrp")
+bus = &"Menu"
+
+[connection signal="button_down" from="HBoxContainer/VBoxContainer/ButtonBlue" to="." method="_on_button_blue_button_down"]
+[connection signal="button_down" from="HBoxContainer/VBoxContainer2/ButtonGreen" to="." method="_on_button_green_button_down"]
+[connection signal="button_down" from="HBoxContainer/VBoxContainer3/ButtonRed" to="." method="_on_button_red_button_down"]

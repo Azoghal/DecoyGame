@@ -1,0 +1,79 @@
+[gd_scene load_steps=10 format=3 uid="uid://cdy6q0kt228x4"]
+
+[ext_resource type="Script" path="res://game_objects/base.gd" id="1_iwypm"]
+[ext_resource type="Texture2D" uid="uid://rp4fbsk2sepn" path="res://Assets/BaseColour.png" id="2_xeya5"]
+[ext_resource type="Texture2D" uid="uid://dmigicp8l47ld" path="res://Assets/healthbarBack.png" id="3_q0ago"]
+[ext_resource type="Texture2D" uid="uid://u2tngxemjjeo" path="res://Assets/healthbarFrontandBack.png" id="4_tgcyo"]
+[ext_resource type="Texture2D" uid="uid://djykqgvt774uh" path="res://Assets/healthbar.png" id="5_dhljq"]
+[ext_resource type="AudioStream" uid="uid://d3mj8vbbhhogb" path="res://Assets/Audio/HIT_METAL_WRENCH_HEAVIEST_02.wav" id="6_2uh5r"]
+[ext_resource type="AudioStream" uid="uid://cdo3sur62siep" path="res://Assets/Audio/DSGNStngr_Kill Confirm Metallic_02.wav" id="7_h5fru"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_60l8b"]
+radius = 48.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_56ors"]
+radius = 32.0
+
+[node name="base" type="Node2D" groups=["Base"]]
+script = ExtResource("1_iwypm")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("2_xeya5")
+
+[node name="BlueTarget" type="Node2D" parent="Sprite2D"]
+position = Vector2(-50, -330)
+
+[node name="RedTarget1" type="Node2D" parent="Sprite2D"]
+position = Vector2(-310, -90)
+
+[node name="RedTarget2" type="Node2D" parent="Sprite2D"]
+position = Vector2(210, 230)
+
+[node name="GreenTarget1" type="Node2D" parent="Sprite2D"]
+position = Vector2(-130, 320)
+
+[node name="GreenTarget2" type="Node2D" parent="Sprite2D"]
+position = Vector2(270, -120)
+
+[node name="Hitbox" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+position = Vector2(-2, 1)
+shape = SubResource("CircleShape2D_60l8b")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(-2, 1)
+shape = SubResource("CircleShape2D_56ors")
+
+[node name="HealthBar" type="TextureProgressBar" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -12.0
+offset_top = -71.0
+offset_right = 488.0
+offset_bottom = 429.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.05, 0.05)
+value = 80.0
+fill_mode = 5
+texture_under = ExtResource("3_q0ago")
+texture_over = ExtResource("4_tgcyo")
+texture_progress = ExtResource("5_dhljq")
+
+[node name="hitsound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_2uh5r")
+bus = &"SFX"
+
+[node name="deadsound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("7_h5fru")
+bus = &"SFX"
+
+[connection signal="area_entered" from="Hitbox" to="." method="_on_hitbox_area_entered"]
+[connection signal="body_entered" from="Hitbox" to="." method="_on_hitbox_body_entered"]
